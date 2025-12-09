@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import ProjectForm from "./components/ProjectForm/ProjectForm";
+import ProjectsList from "./components/ProjectsList/ProjectsList";
+import styles from "./App.module.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [projects, setProjects] = useState([]);
+
+  const addProject = (name) => {
+    const newProject = { id: Date.now(), name, tasks: [] };
+    setProjects([...projects, newProject]);
+  };
+
+  const deleteProject = (id) => {
+    setProjects(projects.filter((p) => p.id !== id));
+  };
+
+  const updateTasks = (id, tasks) => {
+    setProjects(projects.map((p) => (p.id === id ? { ...p, tasks } : p)));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className={styles.app}>
+      <h1>Project Management App</h1>
+      <ProjectForm onAddProject={addProject} />
+      <ProjectsList
+        projects={projects}
+        onDeleteProject={deleteProject}
+        onUpdateTasks={updateTasks}
+      />
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,21 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.deleteBtn {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background-color: #c9302c;
+}
